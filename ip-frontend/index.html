@@ -15,8 +15,8 @@
     <h3> My public IP is <span id="ip"></span></h3>
 
     <script>
-        //const apiUrl= "https://roosmaxj-rahti-projekt-roosmaxj-projekt-webbkommunikation.2.rahtiapp.fi/api/ip";
-        const apiurl= "http://127.0.0.1:8080/api/ip"; 
+        const apiUrl= "https://roosmaxj-rahti-projekt-roosmaxj-projekt-webbkommunikation.2.rahtiapp.fi/api/ip";
+        //const apiurl= "http://127.0.0.1:8080/api/ip"; 
         async function getIp() {
             const res = await fetch(apiUrl)
             const data = await res.json(); 
