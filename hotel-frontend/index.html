@@ -2,18 +2,133 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Boking</title>
+    <title>Cute Hotel Booking</title>
+
     <style>
         body {
-            background-color: antiquewhite;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: "Poppins", sans-serif;
+            background: #f7f2ff;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .page {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            width: 420px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            animation: fadeIn 0.5s ease;
+        }
+
+        h1 {
+            text-align: center;
+            color: #6a4fbf;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #8a6be8;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #5a4a8f;
+        }
+
+        select, input[type="date"], input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border: 2px solid #d8cfff;
+            background: #faf8ff;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #8a6be8;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #6f4fd6;
+        }
+
+        .success {
+            margin-top: 15px;
+            padding: 12px;
+            background: #dfffe2;
+            border-left: 5px solid #4caf50;
+            border-radius: 8px;
+            color: #2e7d32;
+            display: none;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #4a3f7a;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-    <h3> My hotel rooms</h3>
-    <ul id="room-list"></ul>
-    <script src="script.js"></script>
+
+<div class="page">
+
+    <div class="card">
+        <h1>🌸 Hotel Booking</h1>
+
+        <h2>Create Booking</h2>
+
+        <label>Room:</label>
+        <select id="roomSelect"></select>
+
+        <label>From date:</label>
+        <input type="date" id="dateFrom">
+
+        <label>To date:</label>
+        <input type="date" id="dateTo">
+
+        <button id="saveBtn">Save booking</button>
+
+        <div id="successBox" class="success">Booking saved!</div>
+    </div>
+
+    <div class="card">
+        <h2>Reserved bookings</h2>
+        <ul id="bookingList"></ul>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
