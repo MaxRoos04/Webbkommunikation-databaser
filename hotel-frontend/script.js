@@ -11,8 +11,11 @@ async function loadRooms() {
 
     rooms.forEach(room => {
         const opt = document.createElement("option");
+
+        const typeText = room.type ? ` (${room.type})` : "";
         opt.value = room.id;
-        opt.textContent = `${room.room_number} (${room.room_type})`;
+        opt.textContent = `${room.room_number}${typeText}`;
+
         select.appendChild(opt);
     });
 }
@@ -27,7 +30,8 @@ async function loadBookings() {
 
     bookings.forEach(b => {
         const li = document.createElement("li");
-        li.textContent = `Room ${b.room_id}: ${b.datefrom} → ${b.dateto}`;
+        li.textContent = `${b.firstname} ${b.lastname} booked room ${b.room_number} 
+${b.datefrom} → ${b.dateto} (${b.nights} nights, ${b.total_price}€)`;
         list.appendChild(li);
     });
 }
@@ -37,25 +41,43 @@ async function saveBooking() {
     const room_id = document.getElementById("roomSelect").value;
     const datefrom = document.getElementById("dateFrom").value;
     const dateto = document.getElementById("dateTo").value;
-    const addinfo = document.getElementById("addInfo").value;
+
+    const guestSelect = document.getElementById("guestSelect");
+    const guest_id = guestSelect ? guestSelect.value : 1;
 
     const booking = {
-        guest_id: 1,   // Hardcoded for now
+        guest_id,
         room_id,
         datefrom,
         dateto
     };
 
-    const res = await fetch(`${API}/bookings`, {
+    await fetch(`${API}/bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(booking)
     });
 
-    const data = await res.json();
     alert("Booking saved!");
-
     loadBookings();
+}
+
+// Load guests
+async function loadGuests() {
+    const select = document.getElementById("guestSelect");
+    if (!select) return; // If no dropdown exists, skip
+
+    const res = await fetch(`${API}/guests`);
+    const guests = await res.json();
+
+    select.innerHTML = "";
+
+    guests.forEach(g => {
+        const opt = document.createElement("option");
+        opt.value = g.id;
+        opt.textContent = `${g.firstname} ${g.lastname} (${g.visits} visits)`;
+        select.appendChild(opt);
+    });
 }
 
 document.getElementById("saveBtn").addEventListener("click", saveBooking);
@@ -63,3 +85,4 @@ document.getElementById("saveBtn").addEventListener("click", saveBooking);
 // Load everything on page load
 loadRooms();
 loadBookings();
+loadGuests();

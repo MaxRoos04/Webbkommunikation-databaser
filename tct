@@ -1,9 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cute Hotel Booking</title>
-
     <style>
         body {
             font-family: "Poppins", sans-serif;
@@ -97,42 +91,3 @@
             to   { opacity: 1; transform: translateY(0); }
         }
     </style>
-</head>
-<body>
-
-<div class="page">
-
-    <div class="card">
-        <h1>🌸 Hotel Booking</h1>
-
-        <h2>Create Booking</h2>
-
-        <label>Guest:</label>
-        <select id="guestSelect"></select>
-
-
-        <label>Room:</label>
-        <select id="roomSelect"></select>
-
-        <label>From date:</label>
-        <input type="date" id="dateFrom">
-
-        <label>To date:</label>
-        <input type="date" id="dateTo">
-
-        <button id="saveBtn">Save booking</button>
-
-        <div id="successBox" class="success">Booking saved!</div>
-    </div>
-
-    <div class="card">
-        <h2>Reserved bookings</h2>
-        <ul id="bookingList"></ul>
-    </div>
-
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
