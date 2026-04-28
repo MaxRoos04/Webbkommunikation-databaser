@@ -82,7 +82,30 @@ async function loadGuests() {
 
 document.getElementById("saveBtn").addEventListener("click", saveBooking);
 
+//Raport
+
+async function getMonthlyReport() {
+    const res = await fetch(`${API}/report/monthly`);
+    const report = await res.json();
+
+    document.getElementById("report-list").innerHTML = "";
+
+    for (row of report) {
+        document.getElementById("report-list").innerHTML += `
+            <li>
+                <strong>${row.month.substring(0, 7)}</strong><br>
+                Omsättning: ${row.revenue} €<br>
+                Nätter: ${row.total_nights}<br>
+                Bokningar: ${row.total_bookings}<br>
+                Mest populära rum: ${row.most_popular_room}
+            </li>
+        `;
+    }
+}
+
+
 // Load everything on page load
 loadRooms();
 loadBookings();
 loadGuests();
+getMonthlyReport();
